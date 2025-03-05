@@ -8,6 +8,7 @@ import (
 	"time"
 
 	database "github.com/02priyeshraj/Hotel_Management_Backend/config"
+	"github.com/02priyeshraj/Hotel_Management_Backend/models"
 	"github.com/golang-jwt/jwt/v5"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -82,6 +83,7 @@ func UpdateAllTokens(signedToken, signedRefreshToken, userId string) {
 
 // ValidateToken checks if a JWT is valid and not expired
 func ValidateToken(signedToken string) (*SignedDetails, string) {
+	// Parse the token
 	token, err := jwt.ParseWithClaims(
 		signedToken,
 		&SignedDetails{},
@@ -102,6 +104,16 @@ func ValidateToken(signedToken string) (*SignedDetails, string) {
 	// Check token expiration
 	if claims.ExpiresAt.Time.Before(time.Now()) {
 		return nil, "token is expired"
+	}
+
+	// Verify token from the database
+	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
+	defer cancel()
+
+	var user models.User
+	err = userCollection.FindOne(ctx, bson.M{"user_id": claims.Uid}).Decode(&user)
+	if err != nil || user.Token == nil || *user.Token != signedToken {
+		return nil, "invalid or expired token"
 	}
 
 	return claims, ""
