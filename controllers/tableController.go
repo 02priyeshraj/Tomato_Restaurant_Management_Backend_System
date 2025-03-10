@@ -186,7 +186,7 @@ func UpdateTable(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"success": false,
-			"message": err.Error(),
+			"message": "Invalid request payload",
 		})
 		return
 	}
@@ -231,21 +231,33 @@ func UpdateTable(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(map[string]interface{}{
 			"success": false,
-			"message": "Table item update failed",
+			"message": "Failed to update table",
 		})
 		return
 	}
 
-	// Construct response while excluding table_number if nil
-	responseData := map[string]interface{}{
-		"table_id":         existingTable.Table_id,
-		"number_of_guests": existingTable.Number_of_guests,
-		"created_at":       existingTable.Created_at,
-		"updated_at":       time.Now(),
+	// Fetch updated table data
+	var updatedTable models.Table
+	err = tableCollection.FindOne(ctx, bson.M{"table_id": tableId}).Decode(&updatedTable)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]interface{}{
+			"success": false,
+			"message": "Error fetching updated table",
+		})
+		return
 	}
 
-	if table.Table_number != nil {
-		responseData["table_number"] = table.Table_number
+	// Construct response
+	responseData := map[string]interface{}{
+		"table_id":         updatedTable.Table_id,
+		"number_of_guests": updatedTable.Number_of_guests,
+		"created_at":       updatedTable.Created_at,
+		"updated_at":       updatedTable.Updated_at,
+	}
+
+	if updatedTable.Table_number != nil {
+		responseData["table_number"] = updatedTable.Table_number
 	}
 
 	w.WriteHeader(http.StatusOK)

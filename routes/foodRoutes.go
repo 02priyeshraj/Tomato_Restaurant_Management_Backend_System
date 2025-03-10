@@ -13,4 +13,6 @@ func FoodProtectedRoutes(router *mux.Router) {
 	router.HandleFunc("/foods", controllers.CreateFood).Methods(http.MethodPost)
 	router.HandleFunc("/foods/{food_id}", controllers.UpdateFood).Methods(http.MethodPatch)
 	router.HandleFunc("/foods/{food_id}", controllers.DeleteFood).Methods(http.MethodDelete)
+	router.HandleFunc("/foods/menu/{menu_id}", controllers.GetFoodsByMenu).Methods(http.MethodGet)
+
 }

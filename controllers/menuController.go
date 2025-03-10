@@ -3,13 +3,14 @@ package controller
 import (
 	"context"
 	"encoding/json"
-	"log"
+	"errors"
 	"net/http"
+	"strconv"
+	"strings"
 	"time"
 
 	database "github.com/02priyeshraj/Hotel_Management_Backend/config"
 	"github.com/02priyeshraj/Hotel_Management_Backend/models"
-
 	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -19,32 +20,69 @@ import (
 
 var menuCollection *mongo.Collection = database.OpenCollection(database.Client, "menu")
 
-// Get all menus
+// Get all menus with pagination
 func GetMenus(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
 
-	result, err := menuCollection.Find(ctx, bson.M{})
+	recordPerPage, err := strconv.Atoi(r.URL.Query().Get("recordPerPage"))
+	if err != nil || recordPerPage < 1 {
+		recordPerPage = 10
+	}
+
+	page, err := strconv.Atoi(r.URL.Query().Get("page"))
+	if err != nil || page < 1 {
+		page = 1
+	}
+
+	startIndex := (page - 1) * recordPerPage
+
+	matchStage := bson.D{{Key: "$match", Value: bson.D{}}}
+	skipStage := bson.D{{Key: "$skip", Value: startIndex}}
+	limitStage := bson.D{{Key: "$limit", Value: int64(recordPerPage)}}
+	projectStage := bson.D{
+		{Key: "$project", Value: bson.D{
+			{Key: "_id", Value: 0},
+			{Key: "menu_id", Value: 1},
+			{Key: "name", Value: 1},
+			{Key: "category", Value: 1},
+			{Key: "created_at", Value: 1},
+			{Key: "updated_at", Value: 1},
+		}},
+	}
+
+	result, err := menuCollection.Aggregate(ctx, mongo.Pipeline{matchStage, skipStage, limitStage, projectStage})
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": "Error occurred while listing the menu items",
-		})
+		http.Error(w, "Error retrieving menus", http.StatusInternalServerError)
 		return
 	}
 
 	var allMenus []bson.M
 	if err = result.All(ctx, &allMenus); err != nil {
-		log.Fatal(err)
+		http.Error(w, "Error decoding menu data", http.StatusInternalServerError)
+		return
 	}
 
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]interface{}{
+	totalMenus, err := menuCollection.CountDocuments(ctx, bson.M{})
+	if err != nil {
+		http.Error(w, "Error retrieving total menu count", http.StatusInternalServerError)
+		return
+	}
+
+	response := map[string]interface{}{
 		"success": true,
 		"message": "Menus retrieved successfully",
 		"data":    allMenus,
-	})
+		"pagination": map[string]interface{}{
+			"current_page":     page,
+			"records_per_page": recordPerPage,
+			"total_menus":      totalMenus,
+			"total_pages":      (totalMenus + int64(recordPerPage) - 1) / int64(recordPerPage),
+		},
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 // Get a single menu
@@ -52,25 +90,32 @@ func GetMenu(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
 
-	params := mux.Vars(r)
-	menuId := params["menu_id"]
-
-	var menu models.Menu
-	err := menuCollection.FindOne(ctx, bson.M{"menu_id": menuId}).Decode(&menu)
-	if err != nil {
-		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": "Menu not found",
-		})
+	menuId := mux.Vars(r)["menu_id"]
+	if menuId == "" {
+		http.Error(w, "Invalid menu ID", http.StatusBadRequest)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	var menu models.Menu
+	err := menuCollection.FindOne(ctx, bson.M{"menu_id": menuId}).Decode(&menu)
+	if errors.Is(err, mongo.ErrNoDocuments) {
+		http.Error(w, "Menu not found", http.StatusNotFound)
+		return
+	} else if err != nil {
+		http.Error(w, "Error retrieving menu", http.StatusInternalServerError)
+		return
+	}
+
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"success": true,
 		"message": "Menu retrieved successfully",
-		"data":    menu,
+		"data": map[string]interface{}{
+			"menu_id":    menu.Menu_id,
+			"name":       menu.Name,
+			"category":   menu.Category,
+			"created_at": menu.Created_at,
+			"updated_at": menu.Updated_at,
+		},
 	})
 }
 
@@ -81,34 +126,46 @@ func CreateMenu(w http.ResponseWriter, r *http.Request) {
 
 	var menu models.Menu
 	if err := json.NewDecoder(r.Body).Decode(&menu); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": err.Error(),
-		})
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
+	// Generate UniqueID (lowercase version of name)
+	menu.UniqueID = strings.ToLower(menu.Name)
+
+	// Check if a menu with the same UniqueID already exists
+	count, err := menuCollection.CountDocuments(ctx, bson.M{"unique_id": menu.UniqueID})
+	if err != nil {
+		http.Error(w, "Error checking menu existence", http.StatusInternalServerError)
+		return
+	}
+	if count > 0 {
+		http.Error(w, "Menu with this name already exists", http.StatusConflict)
+		return
+	}
+
+	// Set timestamps and unique menu ID
 	menu.Created_at = time.Now()
 	menu.Updated_at = time.Now()
 	menu.ID = primitive.NewObjectID()
 	menu.Menu_id = menu.ID.Hex()
 
-	result, insertErr := menuCollection.InsertOne(ctx, menu)
-	if insertErr != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": "Menu item was not created",
-		})
+	_, err = menuCollection.InsertOne(ctx, menu)
+	if err != nil {
+		http.Error(w, "Error creating menu", http.StatusInternalServerError)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"success": true,
 		"message": "Menu created successfully",
-		"data":    result,
+		"data": map[string]interface{}{
+			"menu_id":    menu.Menu_id,
+			"name":       menu.Name,
+			"category":   menu.Category,
+			"created_at": menu.Created_at,
+			"updated_at": menu.Updated_at,
+		},
 	})
 }
 
@@ -117,37 +174,31 @@ func UpdateMenu(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
 
-	params := mux.Vars(r)
-	menuId := params["menu_id"]
-
+	menuId := mux.Vars(r)["menu_id"]
 	var menu models.Menu
 	if err := json.NewDecoder(r.Body).Decode(&menu); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": err.Error(),
-		})
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
 
-	filter := bson.M{"menu_id": menuId}
-	updateObj := bson.D{}
+	// Generate UniqueID (lowercase version of name)
+	newUniqueID := strings.ToLower(menu.Name)
 
-	if menu.Start_Date != nil && menu.End_Date != nil {
-		if menu.Start_Date.After(*menu.End_Date) {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(map[string]interface{}{
-				"success": false,
-				"message": "Invalid date range: start_date must be before end_date",
-			})
-			return
-		}
-		updateObj = append(updateObj, bson.E{Key: "start_date", Value: menu.Start_Date})
-		updateObj = append(updateObj, bson.E{Key: "end_date", Value: menu.End_Date})
+	// Check if a menu with the same UniqueID already exists (excluding current menu)
+	count, err := menuCollection.CountDocuments(ctx, bson.M{"unique_id": newUniqueID, "menu_id": bson.M{"$ne": menuId}})
+	if err != nil {
+		http.Error(w, "Error checking menu existence", http.StatusInternalServerError)
+		return
+	}
+	if count > 0 {
+		http.Error(w, "Another menu with this name already exists", http.StatusConflict)
+		return
 	}
 
+	updateObj := bson.D{}
 	if menu.Name != "" {
 		updateObj = append(updateObj, bson.E{Key: "name", Value: menu.Name})
+		updateObj = append(updateObj, bson.E{Key: "unique_id", Value: newUniqueID})
 	}
 	if menu.Category != "" {
 		updateObj = append(updateObj, bson.E{Key: "category", Value: menu.Category})
@@ -156,24 +207,36 @@ func UpdateMenu(w http.ResponseWriter, r *http.Request) {
 	menu.Updated_at = time.Now()
 	updateObj = append(updateObj, bson.E{Key: "updated_at", Value: menu.Updated_at})
 
-	upsert := true
-	opt := options.Update().SetUpsert(upsert)
-
-	result, err := menuCollection.UpdateOne(ctx, filter, bson.D{{Key: "$set", Value: updateObj}}, opt)
+	opt := options.Update().SetUpsert(false)
+	result, err := menuCollection.UpdateOne(ctx, bson.M{"menu_id": menuId}, bson.D{{Key: "$set", Value: updateObj}}, opt)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": "Menu update failed",
-		})
+		http.Error(w, "Error updating menu", http.StatusInternalServerError)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
+	if result.MatchedCount == 0 {
+		http.Error(w, "Menu not found", http.StatusNotFound)
+		return
+	}
+
+	// Fetch the updated menu
+	var updatedMenu models.Menu
+	err = menuCollection.FindOne(ctx, bson.M{"menu_id": menuId}).Decode(&updatedMenu)
+	if err != nil {
+		http.Error(w, "Error retrieving updated menu", http.StatusInternalServerError)
+		return
+	}
+
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"success": true,
 		"message": "Menu updated successfully",
-		"data":    result,
+		"data": map[string]interface{}{
+			"menu_id":    updatedMenu.Menu_id,
+			"name":       updatedMenu.Name,
+			"category":   updatedMenu.Category,
+			"created_at": updatedMenu.Created_at,
+			"updated_at": updatedMenu.Updated_at,
+		},
 	})
 }
 
@@ -182,31 +245,40 @@ func DeleteMenu(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
 
-	params := mux.Vars(r)
-	menuId := params["menu_id"]
+	menuId := mux.Vars(r)["menu_id"]
 
+	// Find the menu before deleting
+	var menu models.Menu
+	err := menuCollection.FindOne(ctx, bson.M{"menu_id": menuId}).Decode(&menu)
+	if errors.Is(err, mongo.ErrNoDocuments) {
+		http.Error(w, "Menu not found", http.StatusNotFound)
+		return
+	} else if err != nil {
+		http.Error(w, "Error retrieving menu", http.StatusInternalServerError)
+		return
+	}
+
+	// Delete the menu
 	result, err := menuCollection.DeleteOne(ctx, bson.M{"menu_id": menuId})
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": "Menu deletion failed",
-		})
+		http.Error(w, "Error deleting menu", http.StatusInternalServerError)
 		return
 	}
 
 	if result.DeletedCount == 0 {
-		w.WriteHeader(http.StatusNotFound)
-		json.NewEncoder(w).Encode(map[string]interface{}{
-			"success": false,
-			"message": "Menu not found",
-		})
+		http.Error(w, "Menu not found", http.StatusNotFound)
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(map[string]interface{}{
 		"success": true,
 		"message": "Menu deleted successfully",
+		"data": map[string]interface{}{
+			"menu_id":    menu.Menu_id,
+			"name":       menu.Name,
+			"category":   menu.Category,
+			"created_at": menu.Created_at,
+			"updated_at": menu.Updated_at,
+		},
 	})
 }
