@@ -15,5 +15,5 @@ type Food struct {
 	Menu_id      *string            `json:"menu_id" validate:"required"`
 	Created_at   time.Time          `json:"created_at"`
 	Updated_at   time.Time          `json:"updated_at"`
-	UniqueFoodID string             `bson:"unique_food_id" json:"unique_food_id"` // NEW FIELD
+	UniqueFoodID string             `bson:"unique_food_id" json:"unique_food_id"`
 }

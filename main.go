@@ -32,15 +32,17 @@ func main() {
 	router := mux.NewRouter()
 
 	// Public Routes (No Authentication)
-	routes.PublicRoutes(router)
+	routes.UserPublicRoutes(router)
 
 	// Apply Authentication Middleware to Protected Routes
 	securedRoutes := router.PathPrefix("/").Subrouter()
 	securedRoutes.Use(middleware.Authentication)
-	routes.ProtectedRoutes(securedRoutes)
+	routes.UserProtectedRoutes(securedRoutes)
 	routes.TableProtectedRoutes(securedRoutes)
 	routes.MenuProtectedRoutes(securedRoutes)
 	routes.FoodProtectedRoutes(securedRoutes)
+	routes.OrderProtectedRoutes(securedRoutes)
+	routes.OrderItemProtectedRoutes(securedRoutes)
 
 	log.Printf("Server running on port %s", port)
 	http.ListenAndServe(":"+port, router)
