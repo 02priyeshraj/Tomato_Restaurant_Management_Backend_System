@@ -21,30 +21,7 @@ import (
 
 var orderItemCollection *mongo.Collection = database.OpenCollection(database.Client, "orderitems")
 
-// Function to fetch food details and replace food_id with food_name
-func replaceFoodIdsWithNames(ctx context.Context, items map[string]int) (map[string]int, error) {
-	transformedItems := make(map[string]int)
-	var missingFoodIDs []string
-
-	for foodID, quantity := range items {
-		var food models.Food
-		err := foodCollection.FindOne(ctx, bson.M{"food_id": foodID}).Decode(&food)
-		if err != nil {
-			missingFoodIDs = append(missingFoodIDs, foodID)
-			continue
-		}
-		transformedItems[*food.Name] = quantity
-	}
-
-	if len(missingFoodIDs) > 0 {
-		return nil, errors.New("food items not found: " + strings.Join(missingFoodIDs, ", "))
-	}
-
-	return transformedItems, nil
-}
-
 // GetOrderItems retrieves all order items with food names
-// GetOrderItems retrieves all order items (no need to replace IDs with names)
 func GetOrderItems(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()
@@ -90,7 +67,6 @@ func GetOrderItems(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetOrderItemById retrieves a single order item with food names
-// GetOrderItemById retrieves a single order item (no need to replace IDs with names)
 func GetOrderItemById(w http.ResponseWriter, r *http.Request) {
 	ctx, cancel := context.WithTimeout(context.Background(), 100*time.Second)
 	defer cancel()

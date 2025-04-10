@@ -14,5 +14,5 @@ type Order struct {
 	Order_id   string             `json:"order_id"`
 	Table_id   *string            `json:"table_id" validate:"required"`
 	User_id    *string            `json:"user_id" validate:"required"`
-	Status     string             `json:"status" bson:"status"`
+	Status     string             `json:"status" bson:"status"` //status field: Pending / Placed / Confirmed / Preparing / Served / Piad / Cancelled / Rejected
 }

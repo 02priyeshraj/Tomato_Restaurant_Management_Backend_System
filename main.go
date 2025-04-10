@@ -12,7 +12,6 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// LoadEnv loads environment variables from the .env file
 func LoadEnv() {
 	err := godotenv.Load()
 	if err != nil {
@@ -34,7 +33,7 @@ func main() {
 	// Public Routes (No Authentication)
 	routes.UserPublicRoutes(router)
 
-	// Apply Authentication Middleware to Protected Routes
+	//Authentication Middleware to Protected Routes
 	securedRoutes := router.PathPrefix("/").Subrouter()
 	securedRoutes.Use(middleware.Authentication)
 	routes.UserProtectedRoutes(securedRoutes)
@@ -43,6 +42,7 @@ func main() {
 	routes.FoodProtectedRoutes(securedRoutes)
 	routes.OrderProtectedRoutes(securedRoutes)
 	routes.OrderItemProtectedRoutes(securedRoutes)
+	routes.InvoiceProtectedRoutes(securedRoutes)
 
 	log.Printf("Server running on port %s", port)
 	http.ListenAndServe(":"+port, router)

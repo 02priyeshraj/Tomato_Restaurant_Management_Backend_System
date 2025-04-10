@@ -9,9 +9,11 @@ import (
 )
 
 func MenuProtectedRoutes(router *mux.Router) {
+
 	router.HandleFunc("/menus", controllers.GetMenus).Methods(http.MethodGet)
-	router.HandleFunc("/menus/{menu_id}", controllers.GetMenu).Methods(http.MethodGet)
 	router.HandleFunc("/menus", controllers.CreateMenu).Methods(http.MethodPost)
+
+	router.HandleFunc("/menus/{menu_id}", controllers.GetMenu).Methods(http.MethodGet)
 	router.HandleFunc("/menus/{menu_id}", controllers.UpdateMenu).Methods(http.MethodPatch)
 	router.HandleFunc("/menus/{menu_id}", controllers.DeleteMenu).Methods(http.MethodDelete)
 }

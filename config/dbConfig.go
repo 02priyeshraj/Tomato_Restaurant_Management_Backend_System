@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-// LoadEnv loads environment variables from the .env file
+// loads environment variables from the .env file
 func LoadEnv() {
 	err := godotenv.Load()
 	if err != nil {
@@ -21,7 +21,6 @@ func LoadEnv() {
 }
 
 func DBinstance() *mongo.Client {
-	// Load environment variables
 	LoadEnv()
 
 	MongoDb := os.Getenv("DB")

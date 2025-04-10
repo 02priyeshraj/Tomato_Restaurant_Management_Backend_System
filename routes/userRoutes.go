@@ -16,5 +16,6 @@ func UserPublicRoutes(router *mux.Router) {
 func UserProtectedRoutes(router *mux.Router) {
 	router.HandleFunc("/users", controller.GetUsers).Methods(http.MethodGet)
 	router.HandleFunc("/users/{user_id}", controller.GetUser).Methods(http.MethodGet)
+
 	router.HandleFunc("/users/logout", controller.Logout).Methods(http.MethodPost)
 }
