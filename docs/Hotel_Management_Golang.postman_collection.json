@@ -1,0 +1,1789 @@
+{
+	"info": {
+		"_postman_id": "42e95dcf-5290-4fe9-b5ce-7273c536cb48",
+		"name": "Hotel_Management_Golang",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33218525",
+		"_collection_link": "https://goaway-8105.postman.co/workspace/78fbad60-110a-4b8f-8bc6-00d9f9fc04da/collection/33218525-42e95dcf-5290-4fe9-b5ce-7273c536cb48?action=share&source=collection_link&creator=33218525"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"abc\",\r\n  \"last_name\": \"xyz\",\r\n  \"email\": \"abxy@example.com\",\r\n  \"password\": \"abxy\",\r\n  \"phone\": \"3456789012\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"sd12@example.com\",\r\n  \"password\": \"sd123\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MTYzNDczMn0.mwWRzSEUJQfSZRhOeYePjaB4c-4TGgbdtZ5tHywrpG0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/67cdd10527155669cb4a6cdb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"67cdd10527155669cb4a6cdb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MTYyODA0NX0.LzRnNSaslDI9KQNcDH3Y0UBDRSGWAOseQU5OQaivTjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MTI3Nn0.4so6Lfjud5khjVjDmkzevXUqeNHLsUFvQkKOi6GD27Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"number_of_guests\": 10,\r\n  \"table_number\": 6\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tables",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTables",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTableById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MTI3Nn0.4so6Lfjud5khjVjDmkzevXUqeNHLsUFvQkKOi6GD27Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables/67e695eb11864a6722fa6ee6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"67e695eb11864a6722fa6ee6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MTI3Nn0.4so6Lfjud5khjVjDmkzevXUqeNHLsUFvQkKOi6GD27Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"number_of_guests\": 7\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/tables/67e695eb11864a6722fa6ee6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"67e695eb11864a6722fa6ee6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MTcyMH0.r4wMSjeEB3UhbeYZH39Y0h5ka6W8qILJeerI9cM9kOQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables/67e69767adf0ba3ba55ed072",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"67e69767adf0ba3ba55ed072"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reserveTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables/reserve/67e6961311864a6722fa6ee8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"reserve",
+						"67e6961311864a6722fa6ee8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unreserveTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables/unreserve/67e6961311864a6722fa6ee8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"unreserve",
+						"67e6961311864a6722fa6ee8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getReservedTables",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables/reserved",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"reserved"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUnreservedTables",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tables/unreserved",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tables",
+						"unreserved"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMenu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Chinese chow-mow\",\r\n    \"category\": \"Chinese\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/menus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"menus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllMenus",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/menus",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"menus"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMenuById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/menus/67e69aa1411f6f8811727987",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"menus",
+						"67e69aa1411f6f8811727987"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateMenu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Italian Italo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/menus/67cdf70445fab5be5bb79ef4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"menus",
+						"67cdf70445fab5be5bb79ef4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMenu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/menus/67e69bb8411f6f8811727988",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"menus",
+						"67e69bb8411f6f8811727988"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createFood",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mancurian\",\r\n    \"price\": 13.99,\r\n    \"food_image\": \"https://example.com/chinese.jpg\",\r\n    \"menu_id\": \"67e69bb8411f6f8811727988\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/foods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"foods"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllfood",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/foods",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"foods"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getfoodById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/foods/67e6a21757c01c6db839d0b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"foods",
+						"67e6a21757c01c6db839d0b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateFood",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"price\": 19.99\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/foods/67cf4d61716491f7f485aafb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"foods",
+						"67cf4d61716491f7f485aafb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteFood",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/foods/67e6a21757c01c6db839d0b4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"foods",
+						"67e6a21757c01c6db839d0b4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getFoodByMenu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzI1MjQ5Nn0.Y6iPiaLtmkm5tl5V5lySOltc2P5vU9GOFcKXGZwtAjI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/foods/menu/67cdf70445fab5be5bb79ef4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"foods",
+						"menu",
+						"67cdf70445fab5be5bb79ef4"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"table_id\": \"67e6961311864a6722fa6ee8\",\r\n  \"user_id\": \"67ea3cbd1c4fca3f14dca963\",\r\n  \"order_date\": \"2025-04-10T18:30:00Z\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM0NTA0Nn0.LPvrPo_M7g_F3I5c-KP7U6HIdsJ6Tt4kVrOrGCD-njU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"table_id\": \"67e6962a11864a6722fa6eea\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/orders/67e6aa1af2f5b7a8425db708",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"67e6aa1af2f5b7a8425db708"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllOrders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM0NTA0Nn0.LPvrPo_M7g_F3I5c-KP7U6HIdsJ6Tt4kVrOrGCD-njU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderByID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM0NTA0Nn0.LPvrPo_M7g_F3I5c-KP7U6HIdsJ6Tt4kVrOrGCD-njU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/67e6aa1af2f5b7a8425db708",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"67e6aa1af2f5b7a8425db708"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderByTable",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM0NTA0Nn0.LPvrPo_M7g_F3I5c-KP7U6HIdsJ6Tt4kVrOrGCD-njU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/table/67e6962111864a6722fa6ee9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"table",
+						"67e6962111864a6722fa6ee9"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderByUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM0NTA0Nn0.LPvrPo_M7g_F3I5c-KP7U6HIdsJ6Tt4kVrOrGCD-njU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/user/67e42c9f2cabea84bcd4c0c6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"user",
+						"67e42c9f2cabea84bcd4c0c6"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOrderStatus",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM2MjM4OX0.SWYIwJLybTb9IHYbRCPnAvW6e2IrXEuvvF7y35FDw8U",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"status\": \"Order Paid\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/orders/67e6aa1af2f5b7a8425db708/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"67e6aa1af2f5b7a8425db708",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzM0NTA0Nn0.LPvrPo_M7g_F3I5c-KP7U6HIdsJ6Tt4kVrOrGCD-njU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orders/67e6aa9bf2f5b7a8425db709",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"67e6aa9bf2f5b7a8425db709"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createOrderItem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Response</th>\r",
+							"    </tr>\r",
+							"    <tr>\r",
+							"        <td>{{response}}</td>\r",
+							"    </tr>\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.text() }\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"order_id\": \"67f780f49b655bcd23a1c14f\",\r\n  \"table_id\": \"67e6961311864a6722fa6ee8\",\r\n  \"items\": {\r\n    \"67cf4d61716491f7f485aafb\": 2,\r\n    \"67cf4d8f716491f7f485aafe\": 3,\r\n    \"67cf4d77716491f7f485aafd\": 5\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/orderitems",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orderitems"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllOrderItems",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQzNDkwNjYxfQ.HvDuY3ecMS_WIa_o35S382MBABVXoX55VC_ayzr5GOw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orderitems",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orderitems"
+					],
+					"query": [
+						{
+							"key": "recordPerPage",
+							"value": "5",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderItemsByID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzQ0NDI2MX0.Y-1hGxqjikKTEezDLJZzGJZF1wktghr4Bfoffan8nyI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orderitems/67e8f1a84081a74aa18e39e2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orderitems",
+						"67e8f1a84081a74aa18e39e2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOrderItemsByOrderID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzQ0NDI2MX0.Y-1hGxqjikKTEezDLJZzGJZF1wktghr4Bfoffan8nyI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orderitems/67e804422ffe3f70408d6eef/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orderitems",
+						"67e804422ffe3f70408d6eef",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateOrderItem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzQ0NDI2MX0.Y-1hGxqjikKTEezDLJZzGJZF1wktghr4Bfoffan8nyI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"items\": {\r\n    \"67e69cd2411f6f8811727989\": 4,\r\n    \"67e69cee411f6f881172798a\": 2\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/orderitems/67e85aeeed5f4b04f6f226a5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orderitems",
+						"67e85aeeed5f4b04f6f226a5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteOrderItem",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyc2gxMjNAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiQXJzaCIsImxhc3RfbmFtZSI6IlNpZCIsInVpZCI6IjY3Y2RkMTA1MjcxNTU2NjljYjRhNmNkYiIsImV4cCI6MTc0MzQ0NDI2MX0.Y-1hGxqjikKTEezDLJZzGJZF1wktghr4Bfoffan8nyI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/orderitems/67e85aeeed5f4b04f6f226a5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orderitems",
+						"67e85aeeed5f4b04f6f226a5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createInvoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"order_id\": \"67f780f49b655bcd23a1c14f\",\r\n  \"user_id\": \"67ea3cbd1c4fca3f14dca963\",\r\n  \"payment_method\": \"CASH\",\r\n  \"payment_status\": \"PENDING\", \r\n  \"payment_date\": \"2025-04-10T17:30:00Z\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/invoices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateInvoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"payment_method\" : \"UPI\",\r\n  \"payment_status\": \"PAID\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/invoices/67f783099b655bcd23a1c151",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"67f783099b655bcd23a1c151"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllInvoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices"
+					],
+					"query": [
+						{
+							"key": "recordPerPage",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getInvoiceById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices/67f783099b655bcd23a1c151",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"67f783099b655bcd23a1c151"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteInvoice",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices/67e9a082f144c13e02b67e55",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"67e9a082f144c13e02b67e55"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getInvoiceByOrderId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices/order/67f780f49b655bcd23a1c14f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"order",
+						"67f780f49b655bcd23a1c14f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getInvoicesByUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices/user/67ea3cbd1c4fca3f14dca963",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"user",
+						"67ea3cbd1c4fca3f14dca963"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPendingInvoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices/status/pending",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"status",
+						"pending"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPaidInvoices",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNkMTJAZXhhbXBsZS5jb20iLCJmaXJzdF9uYW1lIjoiU2FuanUiLCJsYXN0X25hbWUiOiJEdXR0IiwidWlkIjoiNjdlYTNjYmQxYzRmY2EzZjE0ZGNhOTYzIiwiZXhwIjoxNzQ0MzU4OTgxfQ.RTW1nzLztu9OmefRQAuGjXRRHPv4RYVRKaH9_-6xKwc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/invoices/status/paid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"invoices",
+						"status",
+						"paid"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "recordPerPage",
+							"value": "5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
