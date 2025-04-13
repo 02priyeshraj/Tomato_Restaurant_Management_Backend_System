@@ -16,7 +16,7 @@ Restaurant_Management_Backend/
 ├── controllers/             # Business logic handlers
 ├── models/                  # MongoDB schemas & structs
 ├── helpers/                 # Utility/helper functions
-├── docs/                     # Postman Collection
+├── docs/                    # Postman Collection
 ├── .env                     # Environment variables
 ├── go.mod                   # Go module dependencies
 ├── go.sum                   # Version checksum for modules
