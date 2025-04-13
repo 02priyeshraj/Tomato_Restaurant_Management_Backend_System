@@ -108,7 +108,7 @@ Here's the updated **Routes Overview** table based on the routes you provided:
 
 You can test all API endpoints using the Postman Collection below:
 
-[Download Postman Collection](./docs/HotelManagement.postman_collection.json)
+[Download Postman Collection](docs/Hotel_Management_Golang.postman_collection.json)
 
 > Import the collection into Postman and set your environment variables for authentication.
 
