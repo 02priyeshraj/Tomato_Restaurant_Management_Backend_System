@@ -59,7 +59,6 @@ export DB= mongo_db_connection_string
 export JWT_SECRET=your_secret_key
 ```
 
----
 
 ### 3. Install Go modules
 
@@ -71,7 +70,6 @@ go mod tidy
 
 This will install all required packages listed in `go.mod`.
 
----
 
 ### 4. Run the server
 
@@ -80,10 +78,6 @@ go run main.go
 ```
 
 The server will start on the specified port (default is `8080`):
-
----
-
-Here's the updated **Routes Overview** table based on the routes you provided:
 
 ---
 
@@ -104,7 +98,7 @@ Here's the updated **Routes Overview** table based on the routes you provided:
 
 ---
 
-## 📬 API Testing – Postman Collection
+## API Testing – Postman Collection
 
 You can test all API endpoints using the Postman Collection below:
 
