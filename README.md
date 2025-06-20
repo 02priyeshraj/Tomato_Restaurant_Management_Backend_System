@@ -1,4 +1,4 @@
-# ByteKitchen - A Restaurant Management Backend System
+# Tomato - A Restaurant Management Backend System
 
 ## Project Overview
 
