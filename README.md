@@ -39,7 +39,7 @@ Ensure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/02priyeshraj/ByteKitchen_Restaurant_Management_Backend_System.git
+git clone https://github.com/02priyeshraj/Tomato_Restaurant_Management_Backend_System.git
 cd Restaurant_Management_Backend
 ```
 
@@ -110,4 +110,4 @@ You can test all API endpoints using the Postman Collection below:
 
 ## Have Suggestions or Issues?
 
-Feel free to open an issue or submit a pull request on GitHub. Let's make Bytekitchen even better together!
+Feel free to open an issue or submit a pull request on GitHub. Let's make Tomato even better together!
