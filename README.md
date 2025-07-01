@@ -111,3 +111,11 @@ You can test all API endpoints using the Postman Collection below:
 ## Have Suggestions or Issues?
 
 Feel free to open an issue or submit a pull request on GitHub. Let's make Tomato even better together!
+
+---
+
+## License
+
+MIT © [Priyesh Raj](https://github.com/02priyeshraj)
+
+---
